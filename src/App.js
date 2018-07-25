@@ -3,6 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 import * as firebase from 'firebase';
 import RoomList from './components/RoomList.js';
+import './components/style-bloc-chat.css';
+
 
   var config = {
     apiKey: "AIzaSyBCeCdMyGLpFwc28p1egBTID4Vg0xaTf1o",
@@ -19,7 +21,6 @@ class App extends Component {
     return (
       <div className="App">
         <header>
-          <h1>Bloc Chat</h1>
         </header>
         <div>
           <RoomList firebase={firebase} />

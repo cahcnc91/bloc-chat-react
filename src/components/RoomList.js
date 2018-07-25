@@ -1,15 +1,23 @@
 import React, { Component } from 'react';
-import * as firebase from 'firebase';
+import './style-bloc-chat.css';
+import { Button, Modal } from 'react-bootstrap';
+
 
 class RoomList extends Component {
   constructor(props) {
     super(props);
+
+    this.handleHide = this.handleHide.bind(this);
+
     this.state = { 
       rooms: [],
-      newRoomName: ''
+      newRoomName: '',
+      show: false
     };
 
     this.roomsRef = this.props.firebase.database().ref('rooms');
+
+
   }
 
   componentDidMount() {
@@ -18,6 +26,10 @@ class RoomList extends Component {
         room.key = snapshot.key;
         this.setState({ rooms: this.state.rooms.concat( room ) })
       });
+  }
+
+  handleHide() {
+    this.setState({ show: false });
   }
 
   handleChange(e) {
@@ -38,24 +50,54 @@ class RoomList extends Component {
   }
 
 
-
   render() {
       return (
-        <div className="RoomList">
-          { this.state.rooms.map( (room, index) =>
-            <li key={index}>
-              {room.name}
-            </li>
-          )} 
-          <section className='newRoom'>
-          <h2>New room</h2>
-          <form>
-            <input type="text" id="new-room-name" value={ this.state.newRoomName } onChange={ (e) => this.handleChange(e) } />
-            <label for="new-room-name">New room's name</label>
-            <button onClick={ (e) => this.handleSubmit(e) }>Create</button>
-          </form>
-          </section>
+        <div className="room-list">
+          <div className="sidenav">
+            <h2>Bloc Chat</h2>
+            <div className="modal-container" style={{ height: 300 }}>
+                <Button
+                  bsStyle="primary"
+                   bsSize="small"
+                   onClick={() => this.setState({ show: true })}
+                >
+                   New Room
+                </Button>
+                
+                { this.state.rooms.map( (room, index) =>
+                <li key={index} className="nav nav-pills nav-stacked">
+                  {room.name}
+                </li>
+                )}
+                
+                <Modal
+                  show={this.state.show}
+                  onHide={this.handleHide}
+                  container={this}
+                  aria-labelledby="contained-modal-title"
+                >
+                  <Modal.Header>
+                    <Modal.Title id="contained-modal-title">
+                      Create new room
+                    </Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                    Enter a room name
+                    <form>
+                      <input type="text" value={ this.state.newRoomName } onChange={ (e) => this.handleChange(e) } />
+                    </form>
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <Button onClick={this.handleHide}>Close</Button>
+                    <button onClick={ (e) => this.handleSubmit(e) }>Create room</button>
+                  </Modal.Footer>
+                </Modal>
+              </div>
+
+               
+          </div>      
         </div>
+
       );
   }
 }

@@ -1,0 +1,50 @@
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.room-list {height: 1200px}
+    
+.sidenav {
+    background-color: #f1f1f1;
+    height: 100%;
+	padding-top: 1%;
+
+	width: 25%;
+}
+
+/* Set black background color, white text and some padding 
+footer {
+    background-color: #555;
+    color: white;
+    padding: 15px;
+}
+*/
+    
+/* On small screens, set height to 'auto' for sidenav and grid 
+@media screen and (max-width: 767px) {
+    .sidenav {
+        height: auto;
+        padding: 15px;
+    }
+    .row.content {height: auto;} 
+}
+*/
+
+/*-------REACT-BOOTSTRAP MODAL--------*/l
+.modal-container {
+  position: relative;
+}
+.modal-container .modal, .modal-container .modal-backdrop {
+  position: absolute;
+}
+
+/*--------SIDENAV--------*/
+li {
+    list-style: none;
+}
+
+
+    
