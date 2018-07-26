@@ -53,7 +53,7 @@ class RoomList extends Component {
   render() {
       return (
         <div className="room-list">
-          <div className="sidenav">
+          
             <h2>Bloc Chat</h2>
             <div className="modal-container" style={{ height: 300 }}>
                 <Button
@@ -63,13 +63,13 @@ class RoomList extends Component {
                 >
                    New Room
                 </Button>
-                
+                <ul className="nav nav-pills nav-stacked">
                 { this.state.rooms.map( (room, index) =>
-                <li key={index} className="nav nav-pills nav-stacked">
+                <li key={index}>
                   {room.name}
                 </li>
                 )}
-                
+                </ul>
                 <Modal
                   show={this.state.show}
                   onHide={this.handleHide}
@@ -95,7 +95,7 @@ class RoomList extends Component {
               </div>
 
                
-          </div>      
+                
         </div>
 
       );

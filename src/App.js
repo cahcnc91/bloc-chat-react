@@ -4,6 +4,7 @@ import './App.css';
 import * as firebase from 'firebase';
 import RoomList from './components/RoomList.js';
 import './components/style-bloc-chat.css';
+import MessageList from './components/MessageList';
 
 
   var config = {
@@ -19,11 +20,14 @@ import './components/style-bloc-chat.css';
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header>
-        </header>
-        <div>
-          <RoomList firebase={firebase} />
+      <div className="App" className="container-fluid">
+        <div class="row content">
+          <div className="col-sm-3 sidenav">
+            <RoomList firebase={firebase} />
+          </div>
+          <div className="col-sm-9">
+            <MessageList />
+          </div>
         </div>
       </div>
     );
