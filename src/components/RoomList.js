@@ -17,7 +17,6 @@ class RoomList extends Component {
 
     this.roomsRef = this.props.firebase.database().ref('rooms');
 
-
   }
 
   componentDidMount() {
@@ -46,7 +45,16 @@ class RoomList extends Component {
     this.roomsRef.push({
       name: newRoomName
     });
-    this.setState({ newRoomName: ''});
+    this.setState({ 
+      newRoomName: '',
+      show: false
+  });
+  }
+
+  activeRoomClicked(room) {
+    const activeRoomSelected = room;
+    console.log(activeRoomSelected);
+    this.props.setActiveRoom(room);
   }
 
 
@@ -63,13 +71,20 @@ class RoomList extends Component {
                 >
                    New Room
                 </Button>
-                <ul className="nav nav-pills nav-stacked">
-                { this.state.rooms.map( (room, index) =>
-                <li key={index}>
-                  {room.name}
-                </li>
-                )}
-                </ul>
+                <table>
+                  <colgroup>
+                    <col id="room-col" />
+                  </colgroup>
+                  <tbody>
+                    { this.state.rooms.map( (room, index) =>
+                    <tr key={index} 
+                      onClick={() => this.activeRoomClicked (room)} style={{ background: this.props.activeRoom === room ? 'blue' : "none" }} >
+                      <td>{room.name}</td>    
+                    </tr>
+                    )}
+                  </tbody>
+                </table>
+
                 <Modal
                   show={this.state.show}
                   onHide={this.handleHide}

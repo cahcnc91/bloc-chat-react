@@ -41,9 +41,26 @@ footer {
 }
 
 /*--------SIDENAV--------*/
-li {
-    list-style: none;
+
+table {
+	width: 100%;
 }
+
+tr {
+    font-size: 20px;
+}
+
+/*
+tr:hover {
+    background: rgba(150, 148, 154, 0.82);
+    cursor: pointer;
+    color: blue;
+}
+
+tr:active {
+	background: green;
+}
+*/
 
 
     
