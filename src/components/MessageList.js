@@ -22,14 +22,14 @@ class MessageList extends Component {
 
 
     render() {
-
         return (
             <div className="message-list">
+              <h2> {this.props.activeRoom.name} </h2>
               <ul>
-                { this.state.messages.map( (message, index) =>
-                  <li key={index} >
-                   {message.roomid} {message.text}
-                  </li>
+                { this.state.messages.map( (message, index) => {
+                    if (this.props.activeRoom.roomId === message.roomId) {
+                        return <li key={index}>{message.username} says: {message.content} </li>
+                    }}
                 )}
               </ul>
             </div>

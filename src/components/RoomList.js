@@ -79,7 +79,7 @@ class RoomList extends Component {
                     { this.state.rooms.map( (room, index) =>
                     <tr key={index} 
                       onClick={() => this.activeRoomClicked (room)} style={{ background: this.props.activeRoom === room ? 'blue' : "none" }} >
-                      <td>{room.name}</td>    
+                      <td>{room.name} {room.roomId}</td>    
                     </tr>
                     )}
                   </tbody>
