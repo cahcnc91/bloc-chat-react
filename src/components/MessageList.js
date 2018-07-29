@@ -6,7 +6,13 @@ class MessageList extends Component {
         super(props);
     
         this.state = { 
-          messages: []
+          messages: [],
+          newMessage: {
+              username: '',
+              content: '',
+              sentAt:'',
+              roomId:''
+          }
         };
     
         this.messagesRef = this.props.firebase.database().ref('messages');
@@ -20,6 +26,10 @@ class MessageList extends Component {
         });
     }
 
+    handleSendMessage() {
+
+    }
+
 
     render() {
         return (
@@ -28,10 +38,16 @@ class MessageList extends Component {
               <ul>
                 { this.state.messages.map( (message, index) => {
                     if (this.props.activeRoom.roomId === message.roomId) {
-                        return <li key={index}>{message.username} says: {message.content} </li>
+                        return <li key={index} style={{ background: index % 2 === 0 ? 'rgba(213, 210, 239, 0.82)' : "none" }}> 
+                                 <div id="username-line" style={{ fontWeight: 'bold'}}> {message.username}</div>
+                                 <div id="time-line">{message.time}</div>
+                                 <div> says: {message.content} </div>
+                               </li>
                     }}
                 )}
               </ul>
+              <h2>Message</h2>
+              
             </div>
         );
     }

@@ -42,8 +42,10 @@ class RoomList extends Component {
   }
 
   createRoom(newRoomName) {
+    const roomsIds = newRoomName.toString();
     this.roomsRef.push({
-      name: newRoomName
+      name: newRoomName,
+      roomsId: roomsIds.replace(/\s/g, "")
     });
     this.setState({ 
       newRoomName: '',
@@ -62,55 +64,55 @@ class RoomList extends Component {
       return (
         <div className="room-list">
           
-            <h2>Bloc Chat</h2>
             <div className="modal-container" style={{ height: 300 }}>
+              <div className="title-new-room-row">
+                <h1>Bloc Chat</h1>
                 <Button
                   bsStyle="primary"
-                   bsSize="small"
-                   onClick={() => this.setState({ show: true })}
+                  bsSize="small"
+                  onClick={() => this.setState({ show: true })}
                 >
-                   New Room
+                  New Room
                 </Button>
-                <table>
-                  <colgroup>
-                    <col id="room-col" />
-                  </colgroup>
-                  <tbody>
-                    { this.state.rooms.map( (room, index) =>
-                    <tr key={index} 
-                      onClick={() => this.activeRoomClicked (room)} style={{ background: this.props.activeRoom === room ? 'blue' : "none" }} >
-                      <td>{room.name} {room.roomId}</td>    
-                    </tr>
-                    )}
-                  </tbody>
-                </table>
-
-                <Modal
-                  show={this.state.show}
-                  onHide={this.handleHide}
-                  container={this}
-                  aria-labelledby="contained-modal-title"
-                >
-                  <Modal.Header>
-                    <Modal.Title id="contained-modal-title">
-                      Create new room
-                    </Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>
-                    Enter a room name
-                    <form>
-                      <input type="text" value={ this.state.newRoomName } onChange={ (e) => this.handleChange(e) } />
-                    </form>
-                  </Modal.Body>
-                  <Modal.Footer>
-                    <Button onClick={this.handleHide}>Close</Button>
-                    <button onClick={ (e) => this.handleSubmit(e) }>Create room</button>
-                  </Modal.Footer>
-                </Modal>
               </div>
+              <table>
+                <colgroup>
+                  <col id="room-col" />
+                </colgroup>
+                <tbody>
+                  { this.state.rooms.map( (room, index) =>
+                  <tr key={index} 
+                    onClick={() => this.activeRoomClicked (room)} style={{ background: this.props.activeRoom === room ? 'blue' : "none" }} >
+                    <td>{room.name}</td>    
+                  </tr>
+                  )}
+                </tbody>
+              </table>
 
-               
-                
+              <Modal
+                show={this.state.show}
+                onHide={this.handleHide}
+                container={this}
+                aria-labelledby="contained-modal-title"
+              >
+                <Modal.Header>
+                  <Modal.Title id="contained-modal-title">
+                    Create new room
+                  </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  Enter a room name
+                  <form>
+                    <input type="text" value={ this.state.newRoomName } onChange={ (e) => this.handleChange(e) } />
+                  </form>
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button onClick={this.handleHide}>Close</Button>
+                  <button onClick={ (e) => this.handleSubmit(e) }>Create room</button>
+                </Modal.Footer>
+              </Modal>
+            </div>
+    
         </div>
 
       );
