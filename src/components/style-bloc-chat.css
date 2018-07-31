@@ -5,9 +5,9 @@
     box-sizing: border-box;
 }
 
-.room-list {height: 1200px}
+.room-list {height: 620px}
 
-.message-list {height: 1200px;}
+.message-list {height: 620px;}
 
 h1 {
 	font-size: 32px;
@@ -44,11 +44,6 @@ footer {
 	padding-top: 2%;
 	width: 25%;
 	padding-left: 30px;
-}
-
-.title-new-room-row {
-	height: 10%;
-	width: 100%;
 }
 
 .title-new-room-row h1 {
@@ -101,17 +96,48 @@ tr:hover {
 	padding-left: 15px;
 }
 
-#username-block li {
-	display:inline;
+.message-list li {
+	padding-left: 15px;
 }
 
-#time-line li {
+#username-line {
 	display: inline;
+}
+
+#time-line {
+	display: inline;
+	padding-left: 70%;
 }
 
 .message-list li {
 	list-style-type: none;
 	padding-bottom: 15px;
+}
+
+.new-messages-div form {
+	height: 50px;
+	bottom: 0;
+	position: fixed;
+	width: 75%;
+}
+
+
+.form-or-choose-room h2{
+	position: fixed;
+}
+
+.new-messages-div textarea {
+	width: 90%;
+	height: 100%;
+}
+
+.new-messages-div button {
+	width: 10%;
+	height: 100%;
+	margin: auto;
+	vertical-align: top;
+	background-color: dimgray;
+	color: white;
 }
 
 

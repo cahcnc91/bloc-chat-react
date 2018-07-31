@@ -37,7 +37,8 @@ class App extends Component {
 
   setUser(user) {
     this.setState({
-      user: user
+      user: user,
+      activeRoom: ''
     })
     console.log(user);
   }
@@ -47,19 +48,24 @@ class App extends Component {
       <div className="App" className="container-fluid">
         <div className="row content">
           <div className="col-sm-3 sidenav">
-            <RoomList 
-            firebase={firebase} 
-            setActiveRoom = {this.setActiveRoom}
-            activeRoom = {this.state.activeRoom} />
+            <div className="roomlist-component">
+              <RoomList 
+              firebase={firebase} 
+              setActiveRoom = {this.setActiveRoom}
+              activeRoom = {this.state.activeRoom} />
+            </div>
+            <div className="user-component">
+              <User firebase={firebase}
+                setUser={(user) => this.setUser(user)}
+                user={this.state.user}
+              />
+            </div>
           </div>
           <div className="col-sm-9">
             <MessageList 
               firebase={firebase}
               activeRoom = {this.state.activeRoom} 
-            />
-            <User firebase={firebase}
-              setUser={(user) => this.setUser(user)}
-              user={this.state.user}
+              user = {this.state.user}
             />
           </div>
         </div>

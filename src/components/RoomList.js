@@ -45,7 +45,7 @@ class RoomList extends Component {
     const roomsIds = newRoomName.toString();
     this.roomsRef.push({
       name: newRoomName,
-      roomsId: roomsIds.replace(/\s/g, "")
+      roomId: roomsIds.replace(/\s/g, "")
     });
     this.setState({ 
       newRoomName: '',
@@ -55,7 +55,6 @@ class RoomList extends Component {
 
   activeRoomClicked(room) {
     const activeRoomSelected = room;
-    console.log(activeRoomSelected);
     this.props.setActiveRoom(room);
   }
 
