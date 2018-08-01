@@ -90,28 +90,30 @@ tr:hover {
 
 .message-list {
 	width: 100%;
+	margin: 0;
 }
 
 .message-list h2 {
 	padding-left: 15px;
 }
 
-.message-list li {
+
+#username-line {
+	width: 60%;
 	padding-left: 15px;
 }
 
-#username-line {
-	display: inline;
-}
-
 #time-line {
-	display: inline;
-	padding-left: 70%;
+    width: 40%;
 }
 
-.message-list li {
-	list-style-type: none;
-	padding-bottom: 15px;
+
+#content-td {
+	padding-left: 15px;
+}
+
+.message-list table {
+	border: 1px solid black;
 }
 
 .new-messages-div form {
@@ -119,6 +121,10 @@ tr:hover {
 	bottom: 0;
 	position: fixed;
 	width: 75%;
+}
+
+.message-list tr {
+	height: 25px;
 }
 
 
