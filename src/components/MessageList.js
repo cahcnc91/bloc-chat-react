@@ -30,26 +30,41 @@ class MessageList extends Component {
             content: e.target.value,       
         });
     }
-
-    convert(x) {
-        var date = new Date(x*1000);
-        // Hours part from the timestamp
-        var hours = date.getHours();
-        // Minutes part from the timestamp
-        var minutes = "0" + date.getMinutes();
-      
-        if(hours > 12) {
-            return hours-12 + ':' + minutes.substr(-2) + 'pm';
-          } 
-          return hours + ':' + minutes.substr(-2) + 'am';
-      }
-
+        
     handleMessageSubmit(e) {
         e.preventDefault();
+        var timeStamp = Date.now();
+        function convertTimestamp(x) {	
+            var d = new Date(x),	
+            yyyy = d.getFullYear(),
+            mm = ('0' + (d.getMonth() + 1)).slice(-2),
+            dd = ('0' + d.getDate()).slice(-2),	
+            hh = d.getHours(),
+            h = hh,
+            min = ('0' + d.getMinutes()).slice(-2),		
+            ampm = 'AM',
+            time;
+                
+            if (hh > 12) {
+                h = hh - 12;
+                ampm = 'PM';
+            } else if (hh === 12) {
+                h = 12;
+                ampm = 'PM';
+            } else if (hh == 0) {
+                h = 12;
+            }
+        
+        time = yyyy + '-' + mm + '-' + dd + ', ' + h + ':' + min + ' ' + ampm;
+            
+        return time;
+        }
+        const timeConverted = convertTimestamp(timeStamp);
+
         const messageItems = this.messagesRef.push({
             username: this.props.user.displayName,
             content: this.state.content,
-            sentAt: this.props.firebase.database.ServerValue.TIMESTAMP,
+            sentAt: timeConverted,
             roomId: this.props.activeRoom.roomId
         });
         this.setState({
@@ -58,10 +73,8 @@ class MessageList extends Component {
             sentAt: '',
             roomId: ''
         }); 
-          
     }
-
-
+    
     render() {
         return (
             <div className="message-list">
@@ -71,7 +84,7 @@ class MessageList extends Component {
                     if (this.props.activeRoom.roomId === message.roomId) {
                         return <li key={index} style={{ background: index % 2 === 0 ? 'rgba(213, 210, 239, 0.82)' : "none" }}> 
                                  <div id="username-line" style={{ fontWeight: 'bold'}}> {message.username}</div>
-                                 <div id="time-line">{this.convert(message.sentAt)}</div>
+                                 <div id="time-line">{message.sentAt}</div>
                                  <div> says: {message.content} </div>
                                </li>
                     }}
