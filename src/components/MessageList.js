@@ -76,6 +76,10 @@ class MessageList extends Component {
         }); 
     }
 
+    handleDeleteMessage(message) {
+        const newArray = this.messagesRef.child(message.key).remove();
+    }
+
     render() {
         return (
             <div className="message-list">
@@ -84,14 +88,18 @@ class MessageList extends Component {
                 { this.state.messages.map( (message, index) => {
                     if (this.props.activeRoom.roomId === message.roomId) {
                         return <table key={index}> 
-                                 <tr> 
-                                     <td id="username-line" style={{ fontWeight: 'bold'}}> {message.username} </td>
-                                     <td id="time-line">{message.sentAt} </td>
-                                 </tr>
-                                 <tr> 
-                                     <td id="content-td">says: {message.content} </td>
-                                     <td></td>
-                                 </tr>
+                                 <tbody>
+                                    <tr> 
+                                        <td id="username-line" style={{ fontWeight: 'bold'}}> {message.username} </td>
+                                        <td id="time-line">{message.sentAt} </td>
+                                    </tr>
+                                    <tr> 
+                                        <td id="content-td">says: {message.content} </td>
+                                        <td>
+                                        <button onClick={ () => this.handleDeleteMessage(message) }>X</button>   
+                                        </td>
+                                    </tr>
+                                  </tbody>
                                </table>
                     }}
                 )}
