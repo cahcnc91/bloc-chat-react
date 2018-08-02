@@ -22,7 +22,14 @@ class MessageList extends Component {
             message.key = snapshot.key;
             this.setState({ messages: this.state.messages.concat( message ) })
         });
+
+        this.messagesRef.on('child_removed', snapshot => {
+            const filteredMessages = this.state.messages.filter( (message) => message !== snapshot.key);
+            this.setState({ messages: filteredMessages });
+        });
     }
+
+
 
     handleMessageChange(e) {
         e.preventDefault();
