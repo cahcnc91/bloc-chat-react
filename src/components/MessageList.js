@@ -24,7 +24,7 @@ class MessageList extends Component {
         });
 
         this.messagesRef.on('child_removed', snapshot => {
-            const filteredMessages = this.state.messages.filter( (message) => message !== snapshot.key);
+            const filteredMessages = this.state.messages.filter( (message) => message.key !== snapshot.key);
             this.setState({ messages: filteredMessages });
         });
     }
